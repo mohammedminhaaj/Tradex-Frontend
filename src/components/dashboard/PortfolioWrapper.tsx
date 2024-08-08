@@ -24,7 +24,7 @@ const PortfolioWrapper: React.FC<{ children: React.ReactNode }> = ({
 	});
 	return (
 		<>
-			<div className='grid grid-rows-2 gap-5 md:col-span-2'>
+			<div className='md:col-span-2 space-y-5 md:row-span-4'>
 				<Wallet
 					data={response?.data as UserStock[] | undefined}
 					isLoading={isLoading}
@@ -33,7 +33,7 @@ const PortfolioWrapper: React.FC<{ children: React.ReactNode }> = ({
 				{/* Placeholder to display all stocks card */}
 				{children}
 			</div>
-			<div className='order-first md:order-last md:col-span-1'>
+			<div className='order-first md:order-last md:col-span-1 md:row-span-4 row-span-1'>
 				<AccountBalance
 					data={response?.data as UserStock[] | undefined}
 					isLoading={isLoading}

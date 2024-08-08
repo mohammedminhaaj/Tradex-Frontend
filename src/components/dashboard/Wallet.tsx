@@ -1,8 +1,8 @@
-import { Loader2, TrendingUp, XCircle } from 'lucide-react';
+import { Loader2, XCircle } from 'lucide-react';
 import DashboardCard from './DashboardCard';
 import { PortfolioProps } from '../../lib/types';
 import PortfolioRecord from './PortfolioRecord';
-import { Link } from 'react-router-dom';
+import WalletEmpty from './WalletEmpty';
 
 const WalletContent: React.FC<PortfolioProps> = ({
 	data,
@@ -17,24 +17,14 @@ const WalletContent: React.FC<PortfolioProps> = ({
 				<XCircle className='size-4 inline' /> Something went wrong
 			</p>
 		);
-	if (!data)
-		return (
-			<div className='w-full flex flex-col gap-3 justify-center items-center mx-auto'>
-				<h3 className='text-lg md:text-xl'>Wallet Empty</h3>
-				<Link
-					to={'stocks/all'}
-					className='primary-button text-xs md:text-sm'>
-					<TrendingUp className='size-4 inline' /> Start Trading
-				</Link>
-			</div>
-		);
+	if (!data) return <WalletEmpty />;
 
 	return (
 		<table className='table-auto border-separate border-spacing-y-5 w-full text-xs md:text-sm'>
 			<thead className='text-left uppercase'>
 				<tr className='text-violet-500'>
 					<th>Name</th>
-					<th>Amount</th>
+					<th>Current Price</th>
 					<th>Total Value</th>
 					<th>Profit</th>
 				</tr>

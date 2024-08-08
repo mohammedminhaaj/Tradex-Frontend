@@ -18,26 +18,31 @@ const PortfolioRecord: React.FC<{
 }) => {
 	const formattedLatestPrice: number = parseFloat(latestPrice);
 	const formattedOwnedPrice: number = parseFloat(ownedPrice);
-	const getTotalValue: () => number = () => formattedLatestPrice * quantity;
-	const getProfitPercentage: () => number = () => {
-		const profit = formattedLatestPrice - formattedOwnedPrice;
-		return (profit / formattedOwnedPrice) * 100;
-	};
-	const profitPercentage = getProfitPercentage();
+	const totalValue: number = formattedLatestPrice * quantity;
+	const profitPercentage =
+		((formattedLatestPrice - formattedOwnedPrice) / formattedOwnedPrice) *
+		100;
+
 	return (
-		<tr className='transition-colors duration-300 hover:bg-violet-100 font-light'>
-			<td className='font-bold'>{name}</td>
-			<td>&pound; {formattedLatestPrice}</td>
-			<td>&pound; {getTotalValue()}</td>
+		<tr className='font-light group'>
+			<td className='font-bold p-2 rounded-tl-xl rounded-bl-xl bg-violet-50 group-hover:bg-violet-100 transition-colors duration-300'>
+				{name}
+			</td>
+			<td className='bg-violet-50 group-hover:bg-violet-100 transition-colors duration-300'>
+				&pound; {formattedLatestPrice}
+			</td>
+			<td className='bg-violet-50 group-hover:bg-violet-100 transition-colors duration-300'>
+				&pound; {totalValue}
+			</td>
 			<td
-				className={
+				className={`bg-violet-50 rounded-tr-xl rounded-br-xl group-hover:bg-violet-100 transition-colors duration-300 ${
 					profitPercentage < 0
 						? 'text-red-500'
 						: profitPercentage > 0
 						? 'text-green-500'
 						: ''
-				}>
-				{profitPercentage}%{' '}
+				}`}>
+				{profitPercentage.toFixed(2)}%{' '}
 				{profitPercentage < 0 ? (
 					<ArrowDown className='size-4 inline' />
 				) : profitPercentage > 0 ? (

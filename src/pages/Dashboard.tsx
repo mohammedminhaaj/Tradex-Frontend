@@ -16,7 +16,7 @@ const Dashboard: React.FC = () => {
 
 	return (
 		<DashboardLayout>
-			<div className='grid grid-cols-1 gap-5 md:grid-cols-3'>
+			<div className='grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-3 md:grid-rows-4'>
 				{/* Passing AllStocks as child to maintain the grid order */}
 				<PortfolioWrapper>
 					<AllStocks />

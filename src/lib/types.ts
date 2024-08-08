@@ -3,6 +3,7 @@ export type ServerResponse = {
 };
 
 export type Stock = {
+	id: number;
 	name: string;
 	price: string;
 	created_at: string;
@@ -20,8 +21,8 @@ export type UserStockData = ServerResponse & {
 };
 
 export type StockData = ServerResponse & {
-	data: Stock[]
-}
+	data: Stock[];
+};
 
 export type PortfolioProps = {
 	data: UserStock[] | undefined;
