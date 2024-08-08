@@ -4,7 +4,7 @@ export const constructedQuery: (
 	url: string,
 	method: string,
 	token: string,
-	body: Record<string, string> | null
+	body?: Record<string, string> | null
 ) => Promise<Response> = (
 	url: string,
 	method: string,
