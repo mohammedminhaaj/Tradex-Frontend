@@ -23,8 +23,12 @@ const AccountBalanceContent: React.FC<PortfolioProps> = ({
 		0
 	);
 	const overallReturn =
-		overallInvestment -
-		data.reduce((prev, curr) => prev + parseFloat(curr.latest_price), 0);
+		data.reduce(
+			(prev, curr) =>
+				prev + parseFloat(curr.latest_price) * curr.quantity,
+			0
+		) - overallInvestment;
+
 	return (
 		<>
 			<DonutChart data={data} />
@@ -55,7 +59,6 @@ const AccountBalanceContent: React.FC<PortfolioProps> = ({
 					</h3>
 				</div>
 			</section>
-			
 		</>
 	);
 };

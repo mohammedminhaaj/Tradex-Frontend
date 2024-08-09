@@ -52,10 +52,6 @@ const LoginForm: React.FC = () => {
 		},
 	});
 
-	// const { push } = useRouter();
-
-	// const searchParams = useSearchParams();
-
 	const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
 		mutate({ username: data.username, password: data.password });
 	};

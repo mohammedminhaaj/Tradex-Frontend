@@ -71,7 +71,7 @@ const AllStocks: React.FC = () => {
 		isError,
 	} = useQuery({
 		queryKey: ['stocks'],
-		queryFn: () => getStocks(userToken!),
+		queryFn: () => getStocks(userToken!, '/api/stock/all/?limit=5'),
 		retry: 1,
 		staleTime: 3000,
 	});
@@ -81,6 +81,7 @@ const AllStocks: React.FC = () => {
 			viewAllowed={
 				!isLoading && !isError && !!response && !!response.data
 			}
+			link='/dashboard/browse'
 			title='Browse'>
 			<AllStocksContent
 				data={response?.data}

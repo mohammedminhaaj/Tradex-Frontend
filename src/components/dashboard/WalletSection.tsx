@@ -4,7 +4,7 @@ import { PortfolioProps } from '../../lib/types';
 import PortfolioRecord from './PortfolioRecord';
 import WalletEmpty from './WalletEmpty';
 
-const WalletContent: React.FC<PortfolioProps> = ({
+export const WalletContent: React.FC<PortfolioProps> = ({
 	data,
 	isLoading,
 	isError,
@@ -45,7 +45,7 @@ const WalletContent: React.FC<PortfolioProps> = ({
 	);
 };
 
-const Wallet: React.FC<PortfolioProps> = ({
+const WalletSection: React.FC<PortfolioProps> = ({
 	data,
 	isLoading,
 	isError,
@@ -53,6 +53,7 @@ const Wallet: React.FC<PortfolioProps> = ({
 	return (
 		<DashboardCard
 			title='Wallet'
+			link='/dashboard/wallet'
 			viewAllowed={!isLoading && !isError && !!data}>
 			<WalletContent
 				data={data}
@@ -63,4 +64,4 @@ const Wallet: React.FC<PortfolioProps> = ({
 	);
 };
 
-export default Wallet;
+export default WalletSection;

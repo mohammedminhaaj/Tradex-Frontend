@@ -13,7 +13,7 @@ const DonutChart: React.FC<{ data: UserStock[] | undefined }> = ({
 
 	return (
 		<ResponsiveContainer width={'100%'} height={'40%'}>
-			<PieChart>
+			<PieChart tabIndex={-1}>
 				<Tooltip />
 				<Pie
 					data={formattedData}
