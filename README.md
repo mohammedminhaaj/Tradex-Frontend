@@ -35,3 +35,13 @@ To start the application in development mode with hot reloading, use the followi
 
 ` >> npm run start `
 
+## Additional Resources
+
+This project requires a backend to function correctly. You can access the backend service using the following link:
+
+[TradeX-Backend](https://github.com/mohammedminhaaj/Tradex-Backend)
+
+Ensure that the backend service is running and accessible before starting the frontend application.
+
+
+
