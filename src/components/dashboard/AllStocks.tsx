@@ -8,23 +8,25 @@ import { Loader2 } from 'lucide-react';
 import StockRecord from './StockRecord';
 import ErrorText from '../ErrorText';
 
-export const AllStocksContent: React.FC<{
+type AllStocksContentType = {
 	data: Stock[] | undefined;
 	isLoading: boolean;
 	isError: boolean;
-}> = ({
+};
+
+export const AllStocksContent: React.FC<AllStocksContentType> = ({
 	data,
 	isLoading,
 	isError,
-}: {
-	data: Stock[] | undefined;
-	isLoading: boolean;
-	isError: boolean;
-}) => {
+}: AllStocksContentType) => {
+	// Handle the data loading state
 	if (isLoading)
 		return <Loader2 className='mx-auto animate-spin text-purple-500' />;
+
+	// Handle the error state
 	if (isError) return <ErrorText />;
 
+	// Handle the empty data state
 	if (!data)
 		return (
 			<div className='w-full flex flex-col gap-3 justify-center items-center mx-auto'>
@@ -59,7 +61,7 @@ export const AllStocksContent: React.FC<{
 };
 
 const AllStocks: React.FC = () => {
-	const { userToken } = useAuthContext();
+	const { userToken } = useAuthContext(); // Get the current auth token
 
 	const {
 		data: response,
@@ -75,6 +77,7 @@ const AllStocks: React.FC = () => {
 	return (
 		<DashboardCard
 			viewAllowed={
+				// Check if the user is allowed to click on the 'View All' button
 				!isLoading && !isError && !!response && !!response.data
 			}
 			link='/dashboard/browse'
@@ -87,5 +90,5 @@ const AllStocks: React.FC = () => {
 		</DashboardCard>
 	);
 };
-
+//memoizing AllStocks in order to avoid re-render due to other state changes in the parent
 export default memo(AllStocks);

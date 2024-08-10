@@ -5,12 +5,13 @@ import LoginLayout from '../layout/LoginLayout';
 import LoginForm from '../components/forms/LoginForm';
 
 const Login: React.FC = () => {
-	const { userToken } = useAuthContext();
+	const { userToken } = useAuthContext(); // Get current user auth token
 	useEffect(() => {
 		document.title = 'Login | TradeX';
-	}, []);
+	}, []); // Set page title
 
 	if (userToken) {
+		// Navigate to dashboard if the user token is already present
 		return <Navigate to='/dashboard' replace={true} />;
 	}
 

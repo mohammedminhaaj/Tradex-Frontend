@@ -9,7 +9,12 @@ const PortfolioWrapper: React.FC<{ children: React.ReactNode }> = ({
 }: {
 	children: React.ReactNode;
 }) => {
-	const { userToken } = useAuthContext();
+	/*
+		A wrapper function which supplies data to both account details as well
+		as wallet section. This is done so that the api call is triggered only 
+		once.
+	*/
+	const { userToken } = useAuthContext(); // Get current auth token
 	const {
 		data: response,
 		isLoading,
@@ -28,7 +33,7 @@ const PortfolioWrapper: React.FC<{ children: React.ReactNode }> = ({
 					isLoading={isLoading}
 					isError={isError || !response}
 				/>
-				{/* Placeholder to display all stocks card */}
+				{/* Placeholder to display all stocks */}
 				{children}
 			</div>
 			<div className='order-first md:order-last md:col-span-1 md:row-span-4'>

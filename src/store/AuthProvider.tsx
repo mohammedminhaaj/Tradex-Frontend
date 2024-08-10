@@ -19,15 +19,18 @@ export const AuthProvider = ({
 }: Readonly<{
 	children: React.ReactNode;
 }>) => {
+	// Manage state of the user
 	const [userToken, setUserToken] = useState<string | null>(
 		localStorage.getItem(AUTH_TOKEN_KEY)
 	);
 
+	// Helper function to store the user token in local storage
 	const login = (token: string) => {
 		setUserToken(token);
 		localStorage.setItem(AUTH_TOKEN_KEY, token);
 	};
-    
+	
+	// Helper function to delete user token from local storage
 	const logout = () => {
 		setUserToken(null);
 		localStorage.removeItem(AUTH_TOKEN_KEY);

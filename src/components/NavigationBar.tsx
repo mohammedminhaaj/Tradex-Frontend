@@ -3,6 +3,9 @@ import Logo from './Logo';
 import { useAuthContext } from '../store/AuthProvider';
 
 const LogoutButton: React.FC = () => {
+	/*
+		Component to handle logout functionality
+	*/
 	const { logout } = useAuthContext();
 	return (
 		<button
@@ -16,6 +19,9 @@ const LogoutButton: React.FC = () => {
 };
 
 const NavigationBar: React.FC = () => {
+	/*
+		Component to display navigation bar
+	*/
 	return (
 		<header className='w-full fixed top-0 z-10 shadow-sm'>
 			<nav className='bg-white backdrop-blur-sm bg-opacity-10 flex justify-between items-center p-3 md:p-5'>

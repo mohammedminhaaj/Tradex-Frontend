@@ -1,6 +1,9 @@
 import { MessageType, useMessageContext } from '../store/MessageProvider';
 
 export default function useToast() {
+	/*
+		Custom hook to display toast messages
+	*/
 	const { insertMessage, shiftMessage } = useMessageContext();
 	const insertToast = (
 		message: string,

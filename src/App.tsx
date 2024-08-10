@@ -7,7 +7,6 @@ function App() {
 	return (
 		<Providers>
 			<Toast />
-
 			<RouterProvider router={router} />
 		</Providers>
 	);

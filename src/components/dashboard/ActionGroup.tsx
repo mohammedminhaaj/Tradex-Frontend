@@ -17,7 +17,10 @@ const ActionGroup: React.FC<ActionGroupTypes> = ({
 	disableSell,
 	toggleDetailsModal,
 }: ActionGroupTypes) => {
+	// State to manage whether the user has clicked on 'Buy' or 'Sell'
 	const [actionMode, setActionMode] = useState<ActionMode | null>(null);
+
+	// If Action mode is selected, show the action button along with the quantity input
 	return actionMode ? (
 		<ActionButton
 			mode={actionMode}
@@ -27,8 +30,9 @@ const ActionGroup: React.FC<ActionGroupTypes> = ({
 			availableQuantity={quantity}
 		/>
 	) : (
+		// Show the Buy and Sell button if action state is null
 		<>
-			{!disableSell && (
+			{!disableSell && ( // Only display the sell button if disableSell prop is false or not specificied
 				<button
 					onClick={() => setActionMode(ActionMode.SELL)}
 					type='button'

@@ -12,6 +12,8 @@ type ModalProps = {
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
 	({ title, onClose, children }: ModalProps, ref) => {
 		return createPortal(
+			// Making the modal display outside the root parent div
+			// Helps in accessibility
 			<>
 				<motion.div
 					initial={{ opacity: 0 }}

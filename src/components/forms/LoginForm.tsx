@@ -7,6 +7,7 @@ import { Loader2 } from 'lucide-react';
 import { useAuthContext } from '../../store/AuthProvider';
 import { redirect } from 'react-router-dom';
 
+// Form fields
 export type LoginFormInput = {
 	username: string;
 	password: string;
@@ -20,16 +21,21 @@ const LoginForm: React.FC = () => {
 		formState: { errors },
 	} = useForm<LoginFormInput>();
 
+	// Custom hook to display toast messages
 	const toast = useToast();
 
+	// Helper function to store the auth token after successful login
 	const { login: loginLocally } = useAuthContext();
 
 	const { mutate, isPending } = useMutation({
+		// Helper function to handle form submission
 		mutationFn: login,
 		onSuccess: async (response) => {
 			const payload = await response.json();
 			if (response.status >= 400) {
+				// Check if the response has any errors
 				if (payload.data) {
+					// Display all the field errors
 					for (const field of Object.keys(payload.data)) {
 						toast(
 							`${field}: ${payload.data[field][0]}`,
@@ -37,21 +43,27 @@ const LoginForm: React.FC = () => {
 						);
 					}
 				} else {
+					// Display general errors
 					toast(payload.message, MessageType.ERROR);
 				}
-
+				// Reset the password field on error
 				reset({ password: '' });
 			} else {
+				// Show success message
 				toast(payload.message);
+				// Store the auth token
 				loginLocally(payload.data['auth_token']);
+				// Redirect the user to dashboard
 				redirect('/dashboard');
 			}
 		},
 		onError: (error) => {
+			// Handle errors during the form submission
 			toast(error.message, MessageType.ERROR);
 		},
 	});
 
+	// Helper function to handle form submission
 	const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
 		mutate({ username: data.username, password: data.password });
 	};
@@ -69,7 +81,7 @@ const LoginForm: React.FC = () => {
 							message:
 								'Username should contain atleast 6 characters',
 						},
-					})}
+					})} // Adding validation
 					className={`form-input peer ${errors.username && 'error'}`}
 					title='Username'
 					type='text'
@@ -83,6 +95,7 @@ const LoginForm: React.FC = () => {
 				</label>
 			</div>
 			{errors.username && (
+				// Displaying field errors
 				<p className='text-xs text-red-500'>
 					{errors.username.message}
 				</p>
@@ -98,7 +111,7 @@ const LoginForm: React.FC = () => {
 							message:
 								'Password should contain atleast 6 characters',
 						},
-					})}
+					})} // Adding validation
 					className={`form-input peer ${errors.password && 'error'}`}
 					title='Password'
 					type='password'
@@ -112,12 +125,13 @@ const LoginForm: React.FC = () => {
 				</label>
 			</div>
 			{errors.password && (
+				// Displaying field errors
 				<p className='text-xs text-red-500'>
 					{errors.password.message}
 				</p>
 			)}
 			<button
-				disabled={isPending}
+				disabled={isPending} // Disable the button when loading
 				title='Login'
 				type='submit'
 				className='primary-button'>

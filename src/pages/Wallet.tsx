@@ -1,16 +1,25 @@
 import { WalletContent } from '../components/dashboard/WalletSection';
 import DashboardLayout from '../layout/DashboardLayout';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getUserStocks } from '../lib/stock_helper';
 import { useAuthContext } from '../store/AuthProvider';
 import SearchBar from '../components/Searchbar';
 import Pagination from '../components/Pagination';
 import BreadCrumbs from '../components/Breadcrumbs';
+import { useEffect } from 'react';
 
 const Wallet: React.FC = () => {
-	const { userToken } = useAuthContext();
+	const { userToken } = useAuthContext(); // Get current auth token
 	const [searchParams] = useSearchParams();
+	const navigate = useNavigate();
+	useEffect(() => {
+		document.title = 'Browse Stocks | TradeX';
+		if (!userToken)
+			// Redirect the user if the token isn't available
+			navigate('/login', { replace: true });
+	}); // Set the title of the page
+
 	const {
 		data: response,
 		isLoading,

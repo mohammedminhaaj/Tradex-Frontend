@@ -11,14 +11,23 @@ const AccountBalanceContent: React.FC<PortfolioProps> = ({
 	isLoading,
 	isError,
 }: PortfolioProps) => {
+	// Handle data loading state
 	if (isLoading)
 		return <Loader2 className='mx-auto animate-spin text-purple-500' />;
+
+	// Handle state where the data fetching resulted in an error
 	if (isError) return <ErrorText />;
+
+	// Handle empty data state
 	if (!data) return <WalletEmpty />;
+
+	// Calculate overall investment for all stocks purchased by the user
 	const overallInvestment = data.reduce(
 		(prev, curr) => prev + parseFloat(curr.invested_amount),
 		0
 	);
+
+	// Calculate overall returns for all stocks purchased by the user
 	const overallReturn =
 		data.reduce(
 			(prev, curr) =>
@@ -33,6 +42,7 @@ const AccountBalanceContent: React.FC<PortfolioProps> = ({
 				<div>
 					<h2 className='text-gray-500 text-sm'>Available Balance</h2>
 					<h3 className='text-3xl md:text-4xl font-bold text-gray-800'>
+						{/* Available balance is the sum of overall investment and overall return */}
 						&pound; {(overallInvestment + overallReturn).toFixed(2)}
 					</h3>
 				</div>

@@ -2,6 +2,9 @@ import { Search } from 'lucide-react';
 import { useId } from 'react';
 
 const SearchBar: React.FC = () => {
+	/*
+		Component to display search bar
+	*/
 	const searchId = useId();
 	return (
 		<form className='relative w-full md:w-fit'>

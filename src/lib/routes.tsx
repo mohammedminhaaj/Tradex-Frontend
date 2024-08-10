@@ -6,10 +6,13 @@ import Wallet from '../pages/Wallet';
 import Browse from '../pages/Browse';
 
 export const router = createBrowserRouter([
+	/*
+		Defining all the routes inside the application
+	*/
 	{
 		path: '/',
 		element: <Navigate to='/login' replace={true} />,
-		errorElement: <NotFound />,
+		errorElement: <NotFound />, // Not found page
 	},
 	{
 		path: '/login',

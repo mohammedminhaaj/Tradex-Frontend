@@ -9,6 +9,9 @@ const ColoredValue: React.FC<ColoredValueType> = ({
 	value,
 	includePercentage,
 }: ColoredValueType) => {
+	/*
+		Component to display colored value along with the icons
+	*/
 	return (
 		<span
 			className={`${

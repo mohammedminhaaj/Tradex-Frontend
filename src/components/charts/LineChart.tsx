@@ -21,11 +21,17 @@ const LineChart: React.FC<LineChartType> = ({
 	isLoading,
 	isError,
 }: LineChartType) => {
+	// Check if the data is still loading
 	if (isLoading)
 		return <Loader2 className='mx-auto animate-spin text-purple-500' />;
+
+	// Check if the data fetching resulted in any errors
 	if (isError) return <ErrorText />;
+
+	// Handle empty data state
 	if (!data) return <p className='text-center'>No Data to Load</p>;
 
+	// Format the data
 	const formattedData = data.map((stock) => ({
 		created_at: new Date(stock.created_at).toLocaleDateString(),
 		price: parseFloat(stock.price),
@@ -34,13 +40,14 @@ const LineChart: React.FC<LineChartType> = ({
 	return (
 		<ResponsiveContainer height={250} width={'90%'} className='text-xs'>
 			<LC data={formattedData} tabIndex={-1}>
-				<XAxis dataKey='created_at' className='' />
-				<YAxis className='' />
-				<Tooltip />
+				<XAxis dataKey='created_at' />
+				<YAxis />
+				{/* Including tool tip */}
+				<Tooltip /> 
 				<Line
 					type='monotone'
 					dataKey='price'
-					stroke='rgb(139 92 246)'
+					stroke='rgb(139 92 246)' // Primary color
 					strokeWidth={2}
 				/>
 			</LC>

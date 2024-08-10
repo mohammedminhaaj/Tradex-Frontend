@@ -6,11 +6,12 @@ import PortfolioWrapper from '../components/dashboard/PortfolioWrapper';
 import AllStocks from '../components/dashboard/AllStocks';
 
 const Dashboard: React.FC = () => {
-	const { userToken } = useAuthContext();
+	const { userToken } = useAuthContext(); // Get user token
 	useEffect(() => {
 		document.title = 'Dashboard | TradeX';
-	}, []);
+	}, []); // Set page title
 	if (!userToken) {
+		// Redirect if the user is not available
 		return <Navigate to='/login' replace={true} />;
 	}
 

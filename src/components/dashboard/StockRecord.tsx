@@ -13,10 +13,14 @@ const StockRecord: React.FC<StockRecordType> = ({
 	dateCreated,
 	price,
 }: StockRecordType) => {
+	// Manage state for the stock details modal
 	const [toggleModal, setToggleModal] = useState<boolean>(false);
+	// Convert the price to floating point
 	const formattedPrice = parseFloat(price);
+	// Convert the date to Date object
 	const formattedDate = new Date(dateCreated);
 
+	// Helper function to toggle the details modal
 	const toggleDetailsModal = () => {
 		setToggleModal((prev: boolean) => !prev);
 	};
@@ -45,7 +49,7 @@ const StockRecord: React.FC<StockRecordType> = ({
 						name={name}
 						toggleDetailsModal={toggleDetailsModal}
 						latestPrice={formattedPrice}
-						disableSell
+						disableSell // Disable the sell button in the stock details section
 					/>
 				)}
 			</AnimatePresence>

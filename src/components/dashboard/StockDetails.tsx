@@ -22,19 +22,21 @@ const StockDetails: React.FC<StockDetailsType> = ({
 	disableSell,
 	toggleDetailsModal,
 }: StockDetailsType) => {
-	const { userToken } = useAuthContext();
+	const { userToken } = useAuthContext(); // Get the user auth token
 	const {
 		data: response,
 		isLoading,
 		isError,
 	} = useQuery({
-		queryKey: ['stockDetails', { name }],
+		queryKey: ['stockDetails', { name }], // We don't want to cache results if the name changes
 		queryFn: () =>
 			getStocks(userToken!, `/api/stock/details/?name=${name}`),
 		retry: 1,
 		staleTime: 3000,
 	});
 
+	// Helper function to get the previous price of the stock
+	// This is useful to display the increase or decrease percentage right next to the stock price
 	const getPreviousPrice: () => string | undefined = () => {
 		if (response && response.data) {
 			if (response.data.length >= 2) {
@@ -43,6 +45,7 @@ const StockDetails: React.FC<StockDetailsType> = ({
 		}
 	};
 
+	// Using the helper function to calculate the percentage gain/loss
 	const calculatePercentage = () => {
 		const previousPrice = getPreviousPrice();
 		if (previousPrice) {
@@ -56,6 +59,7 @@ const StockDetails: React.FC<StockDetailsType> = ({
 		return 0;
 	};
 
+	// Get the percentage
 	const percentage = calculatePercentage();
 
 	return (
@@ -83,6 +87,7 @@ const StockDetails: React.FC<StockDetailsType> = ({
 					)
 				)}
 			</h4>
+			{/* Only display the quantity if its available */}
 			{quantity && (
 				<h4 className='text-xs'>
 					Available Quantity:{' '}

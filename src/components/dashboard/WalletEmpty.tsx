@@ -2,6 +2,9 @@ import { TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const WalletEmpty: React.FC = () => {
+	/*
+		Component to used to display action when the wallet is empty
+	*/
 	return (
 		<div className='w-full flex flex-col gap-3 justify-center items-center mx-auto'>
 			<h3 className='text-lg md:text-xl'>Wallet Empty</h3>

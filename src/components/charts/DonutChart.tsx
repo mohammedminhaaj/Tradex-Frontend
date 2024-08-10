@@ -1,11 +1,12 @@
 import { Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { UserStock } from '../../lib/types';
 
-const DonutChart: React.FC<{ data: UserStock[] | undefined }> = ({
-	data,
-}: {
+type DonutChartType = {
 	data: UserStock[] | undefined;
-}) => {
+};
+
+const DonutChart: React.FC<DonutChartType> = ({ data }: DonutChartType) => {
+	// Formatting the received data to only have name and value
 	const formattedData = data?.map((userStock) => ({
 		name: userStock.stock.name,
 		value: parseFloat(userStock.latest_price) * userStock.quantity,
@@ -19,11 +20,11 @@ const DonutChart: React.FC<{ data: UserStock[] | undefined }> = ({
 					data={formattedData}
 					dataKey='value'
 					nameKey='name'
-					cx='50%'
+					cx='50%' // Position
 					cy='50%'
 					innerRadius={60}
 					outerRadius={100}
-					fill='rgb(139 92 246)'
+					fill='rgb(139 92 246)' // Primary color
 				/>
 			</PieChart>
 		</ResponsiveContainer>
