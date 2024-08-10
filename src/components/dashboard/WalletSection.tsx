@@ -1,8 +1,9 @@
-import { Loader2, XCircle } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import DashboardCard from './DashboardCard';
 import { PortfolioProps } from '../../lib/types';
 import PortfolioRecord from './PortfolioRecord';
 import WalletEmpty from './WalletEmpty';
+import ErrorText from '../ErrorText';
 
 export const WalletContent: React.FC<PortfolioProps> = ({
 	data,
@@ -11,13 +12,10 @@ export const WalletContent: React.FC<PortfolioProps> = ({
 }: PortfolioProps) => {
 	if (isLoading)
 		return <Loader2 className='mx-auto animate-spin text-purple-500' />;
-	if (isError)
-		return (
-			<p className='text-xs md:text-sm text-red-500'>
-				<XCircle className='size-4 inline' /> Something went wrong
-			</p>
-		);
+	if (isError) return <ErrorText />;
 	if (!data) return <WalletEmpty />;
+
+	const slicedData = data.slice(0, 5);
 
 	return (
 		<table className='table-auto border-separate border-spacing-y-5 w-full text-xs md:text-sm'>
@@ -31,13 +29,13 @@ export const WalletContent: React.FC<PortfolioProps> = ({
 			</thead>
 
 			<tbody className='text-gray-500'>
-				{data!.map((userStock) => (
+				{slicedData.map((userStock) => (
 					<PortfolioRecord
 						key={userStock.id}
 						name={userStock.stock.name}
 						quantity={userStock.quantity}
 						latestPrice={userStock.latest_price}
-						ownedPrice={userStock.stock.price}
+						investedAmount={userStock.invested_amount}
 					/>
 				))}
 			</tbody>

@@ -57,9 +57,18 @@ const ActionForm: React.FC<ActionFormProps> = ({
 					toast(payload.message, MessageType.ERROR);
 				}
 			} else {
-				toast(payload.message);
+				toast(
+					mode === ActionMode.BUY
+						? 'Stocks Purchased!'
+						: 'Stocks Sold!'
+				);
 				toggleDetailsModal();
-				queryClient.invalidateQueries({ queryKey: ['userStocks'] });
+				queryClient.invalidateQueries({
+					queryKey: ['userStocks'],
+				});
+				queryClient.invalidateQueries({
+					queryKey: ['wallet'],
+				});
 			}
 		},
 		onError: (error) => {
@@ -96,7 +105,7 @@ const ActionForm: React.FC<ActionFormProps> = ({
 						required: 'This field is required',
 						min: {
 							value: 1,
-							message: "Negative numbers? Seriously?"
+							message: 'Negative numbers? Seriously?',
 						},
 						...(mode === ActionMode.SELL && {
 							max: {

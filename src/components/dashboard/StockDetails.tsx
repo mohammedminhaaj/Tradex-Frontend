@@ -5,6 +5,7 @@ import { getStocks } from '../../lib/stock_helper';
 import { useAuthContext } from '../../store/AuthProvider';
 import LineChart from '../charts/LineChart';
 import ActionGroup from './ActionGroup';
+import ColoredValue from '../ColoredValue';
 
 type StockDetailsType = {
 	name: string;
@@ -73,15 +74,11 @@ const StockDetails: React.FC<StockDetailsType> = ({
 					<Loader2 className='animate-spin size-4' />
 				) : (
 					!!percentage && (
-						<span
-							className={`inline text-xs ${
-								percentage < 0
-									? 'text-red-500'
-									: percentage > 0
-									? 'text-green-500'
-									: ''
-							}`}>
-							{percentage.toFixed(2)}%
+						<span className='text-xs'>
+							<ColoredValue
+								value={percentage}
+								includePercentage
+							/>
 						</span>
 					)
 				)}

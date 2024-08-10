@@ -1,11 +1,11 @@
 import { AnimatePresence } from 'framer-motion';
-import { ArrowDown, ArrowUp } from 'lucide-react';
 import { useState } from 'react';
 import StockDetails from './StockDetails';
+import ColoredValue from '../ColoredValue';
 
 type PortfolioRecordType = {
 	latestPrice: string;
-	ownedPrice: string;
+	investedAmount: string;
 	name: string;
 	quantity: number;
 };
@@ -13,15 +13,16 @@ type PortfolioRecordType = {
 const PortfolioRecord: React.FC<PortfolioRecordType> = ({
 	name,
 	latestPrice,
-	ownedPrice,
+	investedAmount,
 	quantity,
 }: PortfolioRecordType) => {
 	const [toggleModal, setToggleModal] = useState<boolean>(false);
 	const formattedLatestPrice: number = parseFloat(latestPrice);
-	const formattedOwnedPrice: number = parseFloat(ownedPrice);
+	const formattedInvestedAmount: number = parseFloat(investedAmount);
 	const totalValue: number = formattedLatestPrice * quantity;
 	const profitPercentage =
-		((formattedLatestPrice - formattedOwnedPrice) / formattedOwnedPrice) *
+		((formattedLatestPrice * quantity - formattedInvestedAmount) /
+			formattedInvestedAmount) *
 		100;
 
 	const toggleDetailsModal = () => {
@@ -40,27 +41,13 @@ const PortfolioRecord: React.FC<PortfolioRecordType> = ({
 					{name}
 				</td>
 				<td className='bg-violet-50 group-hover:bg-violet-100 transition-colors duration-300'>
-					&pound; {formattedLatestPrice}
+					&pound; {formattedLatestPrice.toFixed(2)}
 				</td>
 				<td className='bg-violet-50 group-hover:bg-violet-100 transition-colors duration-300'>
-					&pound; {totalValue}
+					&pound; {totalValue.toFixed(2)}
 				</td>
-				<td
-					className={`bg-violet-50 rounded-tr-xl rounded-br-xl group-hover:bg-violet-100 transition-colors duration-300 ${
-						profitPercentage < 0
-							? 'text-red-500'
-							: profitPercentage > 0
-							? 'text-green-500'
-							: ''
-					}`}>
-					{profitPercentage.toFixed(2)}%{' '}
-					{profitPercentage < 0 ? (
-						<ArrowDown className='size-4 inline' />
-					) : profitPercentage > 0 ? (
-						<ArrowUp className='size-4 inline' />
-					) : (
-						<></>
-					)}
+				<td className='bg-violet-50 rounded-tr-xl rounded-br-xl group-hover:bg-violet-100 transition-colors duration-300'>
+					<ColoredValue value={profitPercentage} includePercentage />
 				</td>
 			</tr>
 			<AnimatePresence>

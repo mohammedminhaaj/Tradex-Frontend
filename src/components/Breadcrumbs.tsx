@@ -1,0 +1,20 @@
+import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const BreadCrumbs: React.FC<{ currentPage: string }> = ({
+	currentPage,
+}: {
+	currentPage: string;
+}) => {
+	return (
+		<nav className='flex gap-3 flex-wrap items-center justify-start w-full text-sm md:text-lg'>
+			<Link to={'/dashboard'} className='text-gray-500'>
+				Dashboard
+			</Link>
+			<ChevronRight className='size-5 text-gray-500' />
+			<h3 className='text-bold text-violet-500'>{currentPage}</h3>
+		</nav>
+	);
+};
+
+export default BreadCrumbs;

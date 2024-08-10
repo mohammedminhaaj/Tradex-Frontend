@@ -36,7 +36,7 @@ const StockRecord: React.FC<StockRecordType> = ({
 					{formattedDate.toLocaleString()}
 				</td>
 				<td className='bg-violet-50 rounded-tr-xl rounded-br-xl group-hover:bg-violet-100 transition-colors duration-300'>
-					&pound; {formattedPrice}
+					&pound; {formattedPrice.toFixed(2)}
 				</td>
 			</tr>
 			<AnimatePresence>

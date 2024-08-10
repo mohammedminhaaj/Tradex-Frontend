@@ -14,14 +14,17 @@ export type UserStock = {
 	latest_price: string;
 	stock: Stock;
 	quantity: number;
+	invested_amount: string;
 };
 
 export type UserStockData = ServerResponse & {
 	data: UserStock[];
+	count: number;
 };
 
 export type StockData = ServerResponse & {
 	data: Stock[];
+	count: number;
 };
 
 export type PortfolioProps = {

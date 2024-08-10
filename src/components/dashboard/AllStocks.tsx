@@ -4,10 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import { getStocks } from '../../lib/stock_helper';
 import { memo } from 'react';
 import { Stock } from '../../lib/types';
-import { Loader2, XCircle } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import StockRecord from './StockRecord';
+import ErrorText from '../ErrorText';
 
-const AllStocksContent: React.FC<{
+export const AllStocksContent: React.FC<{
 	data: Stock[] | undefined;
 	isLoading: boolean;
 	isError: boolean;
@@ -22,12 +23,7 @@ const AllStocksContent: React.FC<{
 }) => {
 	if (isLoading)
 		return <Loader2 className='mx-auto animate-spin text-purple-500' />;
-	if (isError)
-		return (
-			<p className='text-xs md:text-sm text-red-500'>
-				<XCircle className='size-4 inline' /> Something went wrong
-			</p>
-		);
+	if (isError) return <ErrorText />;
 
 	if (!data)
 		return (

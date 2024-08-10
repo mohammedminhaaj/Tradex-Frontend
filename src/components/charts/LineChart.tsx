@@ -7,7 +7,8 @@ import {
 	Line,
 } from 'recharts';
 import { Stock } from '../../lib/types';
-import { Loader2, XCircle } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import ErrorText from '../ErrorText';
 
 type LineChartType = {
 	data: Stock[] | undefined;
@@ -22,12 +23,7 @@ const LineChart: React.FC<LineChartType> = ({
 }: LineChartType) => {
 	if (isLoading)
 		return <Loader2 className='mx-auto animate-spin text-purple-500' />;
-	if (isError)
-		return (
-			<p className='text-xs md:text-sm text-red-500'>
-				<XCircle className='size-4 inline' /> Something went wrong
-			</p>
-		);
+	if (isError) return <ErrorText />;
 	if (!data) return <p className='text-center'>No Data to Load</p>;
 
 	const formattedData = data.map((stock) => ({
